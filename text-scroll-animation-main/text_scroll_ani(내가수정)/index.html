@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="top" style="height: 100vh; background-color: #ccc;"></div>
+   
+   <div class="main">
+    <div class="cover">
+        <div class="first-parallel"></div>
+    </div>
+    <div class="cover">
+        <div class="second-parallel"></div>
+    </div>
+    <!-- <div class="cover">
+        <div class="third-parallel"></div>
+    </div>
+    <div class="cover">
+        <div class="forth-parallel"></div>
+    </div> -->
+   </div>
+
+   <div class="bottom" style="height: 100vh; background-color: #ccc;"></div>
+   
+</body>
+<script>
+    const pTag1=document.querySelector('.first-parallel');
+    const pTag2=document.querySelector('.second-parallel')
+    const pTag3=document.querySelector('.third-parallel')
+    const pTag4=document.querySelector('.forth-parallel')
+
+    const textArr1='Welcome Hello Welcome Hello Welcome Hello Welcome Hello'.split(' ');
+    //console.log(textArr1)
+    const textArr2='My Portfolio My Portfolio My Portfolio My Portfolio'.split(' ');
+    const textArr3='Thank you Thank you Thank you Thank you'.split(' ');
+    const textArr4='I Love You I Love You I Love You I Love You'.split(' ');
+
+    let count1=0
+    let count2=0
+    let count3=0
+    let count4=0
+
+    initTexts(pTag1, textArr1);
+    initTexts(pTag2, textArr2);
+
+    function initTexts(element, textArry){
+        textArry.push(...textArry)
+        console.log(textArry)
+        for(let i=0; i<textArry.length; i++){
+            //console.log(element.innerText) 비어있음
+            element.innerText += `${textArry[i]}\u00A0\u00A0\u00A0\u00A0`;
+            //console.log(element.innerText)
+        }
+    }
+
+
+
+    function marqueeText(count, element, direction){
+        //console.log(element.scrollWidth)//text의 넓이값
+        if(count> element.scrollWidth/2){
+            count=0;
+            element.style.transform = `translate(0, 0)`
+           
+        }
+
+       
+        element.style.transform = `translate(${direction * count}px,0)`
+        //console.log(count)
+       return count;
+    }
+
+    function animate(){
+        count1++;
+        count2++;
+       
+        count1= marqueeText(count1,pTag1, -1)
+        count2= marqueeText(count2,pTag2, 1)
+
+        window.requestAnimationFrame(animate)
+    }
+    function scrollHandler(){
+        count1 +=25;
+        count2 +=25;
+
+    }
+
+
+    window.addEventListener("scroll",scrollHandler)
+    animate();
+</script>
+</html>
